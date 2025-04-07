@@ -1,31 +1,34 @@
 package ajeng.tugasmobile.myschedule
 
-import ajeng.tugasmobile.myschedule.databinding.ActivityMainBinding
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import ajeng.tugasmobile.myschedule.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-//        enableEdgeToEdge()
         setContentView(binding.root)
 
-        binding.btnMasuk.setOnClickListener {
-            val namaUser = binding.inputNama.editableText.toString().trim()
+        binding.btnRegis.setOnClickListener {
+            val username = binding.inputUsername.text.toString().trim()
+            val email = binding.inputEmail.text.toString().trim()
+            val password = binding.inputPassword.text.toString().trim()
 
-            if(namaUser.isNotEmpty()){
-                val intent = Intent(this, ActivityPertama::class.java)
-                intent.putExtra("nama", namaUser)
+            if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Harap isi semua kolom!", Toast.LENGTH_SHORT).show()
+            } else if (!email.endsWith("@gmail.com")) {
+                Toast.makeText(this, "Email harus berakhiran @gmail.com", Toast.LENGTH_SHORT).show()
+            } else {
+                // Kirim data ke halaman login
+                val intent = Intent(this, ActivityLogin::class.java)
+                intent.putExtra("username", username)
+                intent.putExtra("password", password)
                 startActivity(intent)
-            }
-            else{
-                binding.inputNama.error = "Nama Jangan Kosong"
             }
         }
     }
