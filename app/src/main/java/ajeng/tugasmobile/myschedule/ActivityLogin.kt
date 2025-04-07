@@ -19,7 +19,6 @@ class ActivityLogin : AppCompatActivity() {
         registeredUsername = intent.getStringExtra("username")
         registeredPassword = intent.getStringExtra("password")
 
-        // LOGIN BUTTON
         binding.btnLogin.setOnClickListener {
             val inputUsername = binding.inputEmail.text.toString().trim()
             val inputPassword = binding.inputPassword.text.toString().trim()

@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
             } else if (!email.endsWith("@gmail.com")) {
                 Toast.makeText(this, "Email harus berakhiran @gmail.com", Toast.LENGTH_SHORT).show()
             } else {
-                // Kirim data ke halaman login
                 val intent = Intent(this, ActivityLogin::class.java)
                 intent.putExtra("username", username)
                 intent.putExtra("password", password)
